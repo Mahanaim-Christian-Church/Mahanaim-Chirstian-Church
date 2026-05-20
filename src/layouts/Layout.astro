@@ -1,0 +1,98 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { 
+  title = 'Mahanaim Christian Church - Worship, Prayer & Fellowship',
+  description = 'Join Mahanaim Christian Church for Spirit-filled worship, Bible study, prayer meetings, and Christian fellowship. Read the Word, watch sermons, and find a church near you.',
+  image = '/assets/logo.svg',
+  type = 'website'
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || Astro.site;
+const fullImageUrl = new URL(image, siteUrl);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Church",
+      "@id": `${siteUrl}/#organization`,
+      "name": "Mahanaim Christian Church",
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/assets/logo.svg`
+      },
+      "description": description,
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.youtube.com/@MahanamiChurch",
+        "https://www.facebook.com/MahanamiChurch",
+        "https://www.instagram.com/MahanamiChurch"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "Mahanaim Christian Church",
+      "publisher": {
+        "@id": `${siteUrl}/#organization`
+      }
+    }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
+  <link rel="canonical" href={canonicalURL} />
+  
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={fullImageUrl} />
+  <meta property="og:site_name" content="Mahanaim Christian Church" />
+  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalURL} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={fullImageUrl} />
+  
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  {import.meta.env.PUBLIC_UMAMI_WEBSITE_ID && (
+    <script
+      defer
+      src={import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || 'https://analytics.umami.is/script.js'}
+      data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}
+    ></script>
+  )}
+  
+  <meta name="generator" content={Astro.generator} />
+</head>
+<body>
+  <slot />
+</body>
+</html>
