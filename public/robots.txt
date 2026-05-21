@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yourusername.github.io/Mahanaim-Chirstian-Church/sitemap-index.xml
+Sitemap: https://mahanaim-christian-church.github.io/Mahanaim-Chirstian-Church/sitemap.xml

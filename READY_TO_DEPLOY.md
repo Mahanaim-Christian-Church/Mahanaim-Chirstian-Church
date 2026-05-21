@@ -78,6 +78,11 @@ https://YOUR_USERNAME.github.io/Mahanaim-Christian-Church/
 **Solution:** Fixed CodeQL workflow with proper JavaScript/TypeScript scanning configuration  
 **Status:** ✅ Resolved - Security scanning enabled
 
+### Issue: Build Failures
+**Problem:** Astro couldn't find pages, sitemap plugin failed  
+**Solution:** Moved HTML to src/pages/, removed sitemap plugin, created manual sitemap  
+**Status:** ✅ Resolved - Build successful
+
 ### Issue: Package Lock File Missing
 **Problem:** GitHub Actions couldn't find package-lock.json  
 **Solution:** Generated package-lock.json (202KB)  
