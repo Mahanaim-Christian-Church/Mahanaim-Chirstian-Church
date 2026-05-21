@@ -211,13 +211,18 @@
     ═══════════════════════════════════════════════════════ -->
     <nav class="sidebar" id="sidebar" aria-label="Primary navigation">
       <div class="sidebar-header">
-        <img src="/assets/logo.svg" alt="Mahanaim Christian Church Logo" class="sidebar-logo" width="40" height="40" />
-        <div>
-          <div class="sidebar-brand-name">
-            Mahanaim
-            <span>Christian Church</span>
+        <div style="display:flex;align-items:center;gap:var(--space-3);flex:1;">
+          <img src="/assets/logo.svg" alt="Mahanaim Christian Church Logo" class="sidebar-logo" width="40" height="40" />
+          <div>
+            <div class="sidebar-brand-name">
+              Mahanaim
+              <span>Christian Church</span>
+            </div>
           </div>
         </div>
+        <button class="btn-icon sidebar-close-btn" id="sidebar-close" aria-label="Close navigation">
+          <i data-lucide="x"></i>
+        </button>
       </div>
 
       <div class="sidebar-nav">
@@ -741,4 +746,74 @@
             <div class="footer-col">
               <div class="footer-col-title">Services</div>
               <p>
-                <strong style="color:#
+                <strong style="color:var(--color-text);">Sunday Worship</strong><br/>
+                9:00 AM – 12:00 PM
+              </p>
+              <p>
+                <strong style="color:var(--color-text);">Midweek Prayer</strong><br/>
+                Wednesday, 6:00 PM – 8:00 PM
+              </p>
+              <p>
+                <strong style="color:var(--color-text);">Youth Ministry</strong><br/>
+                Friday, 5:00 PM – 7:00 PM
+              </p>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+              <div class="footer-col-title">Contact</div>
+              <p>
+                <i data-lucide="mail" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:6px;"></i>
+                <a href="mailto:info@mahanaim.org">info@mahanaim.org</a>
+              </p>
+              <p>
+                <i data-lucide="phone" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:6px;"></i>
+                <a href="tel:+10000000000">+1 (000) 000-0000</a>
+              </p>
+              <p>
+                <i data-lucide="map-pin" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:6px;"></i>
+                123 Faith Avenue<br/>
+                <span style="margin-left:20px;">City, State 00000</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>
+              &copy; 2025 Mahanaim Christian Church. All rights reserved.
+              <span style="opacity:0.6;">|</span>
+              Built with faith and purpose.
+            </p>
+            <p style="font-size:var(--text-xs);opacity:0.7;margin-top:var(--space-2);">
+              "For where two or three are gathered together in My name, I am there in the midst of them." — Matthew 18:20
+            </p>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════ -->
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet Map -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Analytics wrapper -->
+  <script src="./scripts/analytics.js"></script>
+  <!-- Bible module -->
+  <script src="./scripts/bible.js"></script>
+  <!-- Map module -->
+  <script src="./scripts/map.js"></script>
+  <!-- Gallery module -->
+  <script src="./scripts/gallery.js"></script>
+  <!-- Main app -->
+  <script src="./scripts/main.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

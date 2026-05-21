@@ -1,0 +1,27 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F1E8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8DCC8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Cross -->
+  <g transform="translate(600, 200)">
+    <rect x="-8" y="-70" width="16" height="140" fill="#C9A961" rx="4"/>
+    <rect x="-50" y="-8" width="100" height="16" fill="#C9A961" rx="4"/>
+    <circle cx="0" cy="-70" r="12" fill="#C9A961"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="600" y="380" font-family="Georgia, serif" font-size="56" fill="#2C2C2C" text-anchor="middle" font-weight="700">
+    Mahanaim Christian Church
+  </text>
+  <text x="600" y="440" font-family="Georgia, serif" font-size="28" fill="#C9A961" text-anchor="middle" font-style="italic">
+    Where God's Presence Dwells
+  </text>
+  <text x="600" y="520" font-family="Arial, sans-serif" font-size="20" fill="#2C2C2C" text-anchor="middle" opacity="0.7">
+    Worship • Prayer • Fellowship • The Word
+  </text>
+</svg>
