@@ -189,10 +189,11 @@
 - [x] Code is complete and functional
 - [x] All dependencies installed
 - [x] package-lock.json generated
-- [x] GitHub Actions workflow configured
+- [x] GitHub Actions workflows configured (deploy + security)
 - [x] Documentation complete
 - [x] Assets created
 - [x] Configuration files ready
+- [x] CodeQL security scanning enabled
 
 ### ⏳ Pending
 - [ ] Files committed to Git

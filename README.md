@@ -354,6 +354,15 @@ Edit `src/style.css` → CSS custom properties:
 - **Safe to expose:** Public API keys, YouTube IDs, Umami Website IDs, Formspree endpoints
 - **Never expose:** Private API keys, database credentials, authentication tokens
 
+### Security Features
+
+- **CodeQL Security Scanning** - Automated vulnerability detection
+- **Dependabot** - Dependency security updates
+- **HTTPS Enforced** - All traffic encrypted
+- **Static Site** - Minimal attack surface
+
+See [SECURITY.md](SECURITY.md) for complete security policy.
+
 ### Bible API
 
 The default Bible API ([bible-api.com](https://bible-api.com)) is public and free. If you use a paid API requiring a secret key, consider:
