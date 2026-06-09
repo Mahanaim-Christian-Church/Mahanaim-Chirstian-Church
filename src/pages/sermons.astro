@@ -73,24 +73,45 @@ try {
     <section class="section sermons-page">
       <p class="eyebrow">Sermons & Media</p>
       <h3 class="page-title">Latest Messages</h3>
-      <p class="hero-copy">The latest videos from Mahanaim Christian Church are loaded from YouTube's public channel feed. No YouTube API key is used.</p>
-      <p><a class="btn btn-primary" href={channelUrl} target="_blank" rel="noopener noreferrer">Visit YouTube Channel</a></p>
+      <p class="hero-copy">Watch the latest messages from Mahanaim Christian Church directly on this page. Videos are loaded from YouTube's public channel feed with no API key.</p>
 
       {videos.length > 0 ? (
-        <div class="sermon-grid">
-          {videos.map((video) => (
-            <article class="sermon-card">
-              <a class="sermon-thumb" href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${video.title}`}>
-                <img src={video.thumbnail || `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`} alt="" loading="lazy" />
-                <span>Watch</span>
-              </a>
-              <div>
-                <time datetime={video.published}>{video.published ? new Date(video.published).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</time>
-                <h2>{video.title}</h2>
-                {video.description && <p>{video.description.slice(0, 150)}{video.description.length > 150 ? '...' : ''}</p>}
-              </div>
-            </article>
-          ))}
+        <div class="media-stage" data-media-stage>
+          <div class="media-player-card">
+            <div class="media-player-frame">
+              <iframe
+                id="sermon-player"
+                src={`https://www.youtube.com/embed/${videos[0].videoId}?rel=0`}
+                title={videos[0].title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="media-now-playing">
+              <p class="eyebrow">Now Playing</p>
+              <h2 id="sermon-title">{videos[0].title}</h2>
+              <p id="sermon-meta">{videos[0].published ? new Date(videos[0].published).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</p>
+            </div>
+          </div>
+
+          <aside class="media-queue" aria-label="Latest sermon videos">
+            <div class="media-queue-head">
+              <p class="eyebrow">Latest 5</p>
+              <a href={channelUrl} target="_blank" rel="noopener noreferrer">YouTube Channel</a>
+            </div>
+            {videos.map((video, index) => (
+              <button
+                class={`media-video-item${index === 0 ? ' active' : ''}`}
+                type="button"
+                data-video-id={video.videoId}
+                data-video-title={video.title}
+                data-video-date={video.published ? new Date(video.published).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}>
+                <span class="media-video-thumb"><img src={video.thumbnail || `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`} alt="" loading="lazy" /><span>Play</span></span>
+                <span class="media-video-copy"><strong>{video.title}</strong><small>{video.published ? new Date(video.published).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</small></span>
+              </button>
+            ))}
+          </aside>
         </div>
       ) : (
         <div class="media-card">
@@ -101,5 +122,6 @@ try {
     </section>
   </main>
   <script is:inline src="../scripts/main.js?v=20260609-map"></script>
+  <script is:inline src="../scripts/sermons.js?v=20260609-media"></script>
 </body>
 </html>
