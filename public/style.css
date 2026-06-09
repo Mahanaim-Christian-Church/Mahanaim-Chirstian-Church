@@ -80,6 +80,16 @@ h3 { font-size: 1.55rem; }
 .leaflet-container a.leaflet-popup-close-button { color: var(--gold); }
 
 .article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.sermons-page { min-height: calc(100vh - 90px); }
+.sermon-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.sermon-card { display: flex; flex-direction: column; gap: 1rem; background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); border: 1px solid var(--line); border-radius: 24px; padding: 1rem; }
+.sermon-thumb { position: relative; display: block; overflow: hidden; border-radius: 18px; background: var(--charcoal); text-decoration: none; }
+.sermon-thumb img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .25s; }
+.sermon-thumb span { position: absolute; inset: auto .75rem .75rem auto; color: var(--black); background: var(--gold); border-radius: 999px; padding: .35rem .7rem; font-weight: 900; }
+.sermon-card:hover .sermon-thumb img { transform: scale(1.05); }
+.sermon-card time { color: var(--gold); font-size: .82rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+.sermon-card h2 { font-size: 1.45rem; margin-top: .35rem; line-height: 1.08; }
+.sermon-card p { color: var(--muted); font-size: .94rem; }
 .contact { text-align: center; }
 .contact p { margin-inline: auto; color: var(--muted); }
 .contact a { color: var(--gold); font-weight: 900; }
@@ -94,7 +104,7 @@ h3 { font-size: 1.55rem; }
   .site-nav.open { display: flex; }
   .split, .site-footer { grid-template-columns: 1fr; }
   .team-grid, .ministry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .events-grid, .article-grid { grid-template-columns: 1fr; }
+  .events-grid, .article-grid, .sermon-grid { grid-template-columns: 1fr; }
   #church-map { min-height: 420px; }
 }
 

@@ -1,0 +1,101 @@
+---
+const channelId = 'UCpCEVmnuoAzm1oBFkjQfIvA';
+const channelUrl = `https://www.youtube.com/channel/${channelId}`;
+const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+
+function textBetween(source, tag) {
+  const match = source.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`));
+  return match ? match[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : '';
+}
+
+function attr(source, name) {
+  const match = source.match(new RegExp(`${name}="([^"]+)"`));
+  return match ? match[1] : '';
+}
+
+let videos = [];
+let feedError = '';
+
+try {
+  const response = await fetch(feedUrl);
+  if (!response.ok) throw new Error(`YouTube feed returned ${response.status}`);
+  const xml = await response.text();
+  videos = xml
+    .split('<entry>')
+    .slice(1, 6)
+    .map(entry => {
+      const videoId = textBetween(entry, 'yt:videoId');
+      const title = textBetween(entry, 'title');
+      const published = textBetween(entry, 'published');
+      const mediaGroup = entry.match(/<media:group>([\s\S]*?)<\/media:group>/)?.[1] || '';
+      const thumbnail = attr(mediaGroup.match(/<media:thumbnail[^>]*>/)?.[0] || '', 'url');
+      const description = textBetween(mediaGroup, 'media:description');
+      return { videoId, title, published, thumbnail, description };
+    })
+    .filter(video => video.videoId && video.title);
+} catch (error) {
+  feedError = error instanceof Error ? error.message : 'Unable to load YouTube feed';
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sermons | Mahanaim Christian Church</title>
+  <meta name="description" content="Watch the latest sermons and videos from Mahanaim Christian Church." />
+  <link rel="icon" type="image/png" href="../assets/mahanaim-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Mahanaim Christian Church home">
+      <img src="../assets/mahanaim-logo.png" alt="Mahanaim Christian Church logo" />
+      <span><strong>Mahanaim</strong> Christian Church</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../#about">About</a>
+      <a href="../#ministries">Ministries</a>
+      <a href="./" class="active">Sermons</a>
+      <a href="../#events">Events</a>
+      <a href="../#locations">Locations</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section sermons-page">
+      <p class="eyebrow">Sermons & Media</p>
+      <h1 style="font-size:clamp(4rem,10vw,8rem);">Latest Messages</h1>
+      <p class="hero-copy">The latest videos from Mahanaim Christian Church are loaded from YouTube's public channel feed. No YouTube API key is used.</p>
+      <p><a class="btn btn-primary" href={channelUrl} target="_blank" rel="noopener noreferrer">Visit YouTube Channel</a></p>
+
+      {videos.length > 0 ? (
+        <div class="sermon-grid">
+          {videos.map((video) => (
+            <article class="sermon-card">
+              <a class="sermon-thumb" href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${video.title}`}>
+                <img src={video.thumbnail || `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`} alt="" loading="lazy" />
+                <span>Watch</span>
+              </a>
+              <div>
+                <time datetime={video.published}>{video.published ? new Date(video.published).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</time>
+                <h2>{video.title}</h2>
+                {video.description && <p>{video.description.slice(0, 150)}{video.description.length > 150 ? '...' : ''}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="media-card">
+          <h2>Videos could not be loaded right now.</h2>
+          <p>{feedError || 'Please visit the YouTube channel to watch the latest messages.'}</p>
+        </div>
+      )}
+    </section>
+  </main>
+</body>
+</html>
