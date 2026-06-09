@@ -39,6 +39,8 @@
     }
   ];
 
+  const highlightedCountries = new Set(['India', 'Australia', 'United States of America']);
+
   function directionsUrl(location) {
     return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address)}`;
   }
@@ -68,11 +70,33 @@
       maxBounds: [[-85, -180], [85, 180]],
       maxBoundsViscosity: 1
     }).setView([12.8, 75.6], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
       noWrap: true,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(map);
+
+    fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+      .then(response => response.json())
+      .then(world => {
+        L.geoJSON(world, {
+          interactive: false,
+          style(feature) {
+            const name = feature?.properties?.name || '';
+            const active = highlightedCountries.has(name);
+            return {
+              color: active ? '#d8b45d' : '#5b554c',
+              weight: active ? 1.4 : 0.55,
+              fillColor: active ? '#d8b45d' : '#514b43',
+              fillOpacity: active ? 0.58 : 0.2,
+              opacity: active ? 0.9 : 0.45
+            };
+          }
+        }).addTo(map);
+      })
+      .catch(() => {
+        // Country highlighting is decorative; pins remain usable if the layer cannot load.
+      });
 
     const icon = L.divIcon({ className: 'custom-marker', html: '<div class="marker-pin"></div>', iconSize: [30, 42], iconAnchor: [15, 42] });
     locations.forEach(location => {

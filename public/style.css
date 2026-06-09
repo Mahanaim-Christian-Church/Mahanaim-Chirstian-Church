@@ -62,6 +62,7 @@ h3 { font-size: 1.55rem; }
 .team-hierarchy { position: relative; display: grid; justify-items: center; gap: 1.5rem; margin-top: 2rem; }
 .team-row { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; width: 100%; }
 .team-row-primary { grid-template-columns: repeat(2, minmax(0, 360px)); justify-content: center; gap: 1.25rem; }
+.profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 2rem; }
 .team-branch { width: min(620px, 68%); height: 48px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); border-right: 1px solid var(--line); position: relative; }
 .team-branch::before, .team-branch::after { content: ''; position: absolute; top: -48px; width: 1px; height: 48px; background: var(--line); }
 .team-branch::before { left: 32%; }
@@ -124,7 +125,7 @@ h3 { font-size: 1.55rem; }
   .site-nav { position: absolute; left: 1rem; right: 1rem; top: calc(100% + .5rem); display: none; flex-direction: column; align-items: stretch; padding: .75rem; border: 1px solid var(--line); border-radius: 18px; background: var(--charcoal); }
   .site-nav.open { display: flex; }
   .split, .site-footer { grid-template-columns: 1fr; }
-  .team-row, .ministry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .team-row, .profile-grid, .ministry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-branch, .team-row::before { display: none; }
   .events-grid, .article-grid, .sermon-grid { grid-template-columns: 1fr; }
   #church-map { min-height: 420px; }
@@ -132,6 +133,6 @@ h3 { font-size: 1.55rem; }
 
 @media (max-width: 560px) {
   .brand span { display: none; }
-  .team-row, .ministry-grid { grid-template-columns: 1fr; }
+  .team-row, .profile-grid, .ministry-grid { grid-template-columns: 1fr; }
   .hero { min-height: 760px; }
 }
