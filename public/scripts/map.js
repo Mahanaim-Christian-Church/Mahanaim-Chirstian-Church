@@ -50,7 +50,6 @@
         <div class="map-popup-body">
           <h3>${location.name}</h3>
           <p><strong>${location.status}</strong></p>
-          <p>${location.address}</p>
           <p>${location.serviceTimes}</p>
           <p>${location.email}</p>
           <a href="${directionsUrl(location)}" target="_blank" rel="noopener noreferrer" data-location="${location.name}">Get Directions</a>
@@ -67,7 +66,6 @@
       <article class="location-card" tabindex="0" data-location-index="${index}">
         <span class="status">${location.status}</span>
         <h3>${location.name}</h3>
-        <p>${location.address}</p>
         <p>${location.serviceTimes}</p>
         <p><a href="mailto:${location.email}">${location.email}</a></p>
         <p><a href="${directionsUrl(location)}" target="_blank" rel="noopener noreferrer">Get Directions</a></p>
@@ -98,18 +96,21 @@
     const mapEl = document.getElementById('church-map');
     if (!mapEl || !window.L) return;
 
-    const map = L.map(mapEl, { scrollWheelZoom: false }).setView([12.8, 75.6], 2);
+    const map = L.map(mapEl, {
+      scrollWheelZoom: false,
+      worldCopyJump: false,
+      maxBounds: [[-85, -180], [85, 180]],
+      maxBoundsViscosity: 1
+    }).setView([12.8, 75.6], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
+      noWrap: true,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     const icon = L.divIcon({ className: 'custom-marker', html: '<div class="marker-pin"></div>', iconSize: [30, 42], iconAnchor: [15, 42] });
     const markers = locations.map((location, index) => {
       const marker = L.marker([location.lat, location.lng], { icon }).addTo(map).bindPopup(popup(location), { maxWidth: 330 });
-      marker.on('mouseover', () => {
-        if (window.matchMedia('(hover: hover)').matches) marker.openPopup();
-      });
       marker.on('popupopen', () => {
         document.querySelectorAll('.location-card').forEach(card => card.classList.toggle('active', Number(card.dataset.locationIndex) === index));
         window.Analytics?.mapMarkerOpen(location.name);
