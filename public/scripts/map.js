@@ -101,6 +101,9 @@
     const icon = L.divIcon({ className: 'custom-marker', html: '<div class="marker-dot"></div>', iconSize: [18, 18], iconAnchor: [9, 9] });
     locations.forEach(location => {
       const marker = L.marker([location.lat, location.lng], { icon }).addTo(map).bindPopup(popup(location), { maxWidth: 330 });
+      marker.on('mouseover', () => {
+        if (window.matchMedia('(hover: hover)').matches) marker.openPopup();
+      });
       marker.on('popupopen', () => {
         window.Analytics?.mapMarkerOpen(location.name);
         setTimeout(() => {
