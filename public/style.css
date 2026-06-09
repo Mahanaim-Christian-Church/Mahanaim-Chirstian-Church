@@ -29,7 +29,12 @@ a { color: inherit; }
 .site-header:hover .brand span { opacity: 1; transform: translateX(0); }
 .brand strong { display: block; font-family: var(--font-display); font-size: 1.35rem; color: var(--gold); line-height: 1; }
 .site-nav { display: flex; flex-direction: column; align-items: stretch; gap: .35rem; min-width: 230px; }
-.site-nav a { text-decoration: none; color: var(--muted); padding: .7rem .85rem; border-radius: 12px; font-size: .92rem; font-weight: 700; transition: color .2s, background .2s, border-color .2s; border: 1px solid transparent; white-space: nowrap; }
+.site-nav a { position: relative; display: flex; align-items: center; gap: .75rem; text-decoration: none; color: var(--muted); padding: .7rem .85rem; border-radius: 12px; font-size: 0; font-weight: 700; transition: color .2s, background .2s, border-color .2s; border: 1px solid transparent; white-space: nowrap; }
+.site-nav a::before { content: attr(data-icon); display: grid; place-items: center; width: 32px; height: 32px; flex: 0 0 32px; border-radius: 10px; color: var(--muted); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.06); font-size: 1rem; line-height: 1; opacity: .9; transition: color .2s, background .2s, border-color .2s, box-shadow .2s; }
+.site-nav a::after { content: attr(data-label); opacity: 0; transform: translateX(-6px); transition: opacity .2s, transform .2s; }
+.site-header:hover .site-nav a { font-size: .92rem; }
+.site-header:hover .site-nav a::after { opacity: 1; transform: translateX(0); }
+.site-nav a:hover::before, .site-nav a.active::before { color: var(--black); background: var(--gold); border-color: var(--gold); box-shadow: 0 0 0 5px rgba(196,167,125,.12); }
 .site-nav a:hover, .site-nav a.active { color: var(--ivory); background: rgba(196,167,125,.1); border-color: var(--line); }
 .menu-toggle { display: none; background: transparent; color: var(--gold); border: 1px solid var(--line); border-radius: 999px; padding: .55rem .9rem; font-weight: 800; }
 main, .site-footer { margin-left: 82px; }
@@ -78,8 +83,9 @@ h3 { font-size: 1.55rem; }
 .page-card { display: block; min-height: 190px; text-decoration: none; }
 .events-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .person-card, .feature-card, .event-card, .article-card, .media-card, .location-card { background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); border: 1px solid var(--soft-line); border-radius: 22px; padding: 1.25rem; box-shadow: 0 12px 40px rgba(0,0,0,.34); }
-.person-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin-bottom: 1rem; border: 1px solid var(--line); }
+.person-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin-bottom: 1rem; border: 1px solid var(--line); filter: grayscale(1) saturate(.65) contrast(1.06); transition: filter .35s ease, transform .35s ease, border-color .35s ease; }
 .person-card { position: relative; width: 100%; text-align: center; }
+.person-card:hover img { filter: grayscale(0) saturate(1.05) contrast(1); transform: scale(1.025); border-color: rgba(196,167,125,.72); }
 .person-card span { display: inline-flex; margin-bottom: .55rem; color: var(--black); background: var(--gold); border-radius: 999px; padding: .22rem .62rem; font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
 .lead-servant { padding: 1.5rem; background: radial-gradient(circle at top, rgba(216,180,93,.22), rgba(255,255,255,.045) 54%, rgba(255,255,255,.025)); border-color: rgba(216,180,93,.62); box-shadow: 0 24px 80px rgba(216,180,93,.12); }
 .lead-servant::after { content: ''; position: absolute; inset: -10px; border: 1px solid rgba(216,180,93,.22); border-radius: 30px; pointer-events: none; }
@@ -141,6 +147,8 @@ h3 { font-size: 1.55rem; }
   .menu-toggle { display: inline-flex; }
   .site-nav { position: absolute; left: 1rem; right: 1rem; top: calc(100% + .5rem); display: none; flex-direction: column; align-items: stretch; padding: .75rem; border: 1px solid var(--line); border-radius: 18px; background: var(--charcoal); }
   .site-nav.open { display: flex; }
+  .site-nav a { font-size: .92rem; }
+  .site-nav a::after { opacity: 1; transform: none; }
   .split, .site-footer { grid-template-columns: 1fr; }
   .team-row, .ministry-grid, .page-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .profile-grid { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
