@@ -131,7 +131,7 @@ h3 { font-size: 1.55rem; }
 .draft-meta { color: var(--gold) !important; font-size: .9rem; font-weight: 800; }
 .draft-delete { margin-top: 1rem; }
 .sermons-page { min-height: calc(100vh - 90px); }
-.media-stage { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, .55fr); gap: 1rem; margin-top: 2rem; align-items: stretch; }
+.media-stage { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(300px, .45fr); gap: 1rem; margin-top: 2rem; align-items: stretch; }
 .media-player-card { overflow: hidden; border: 1px solid var(--soft-line); border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); box-shadow: var(--shadow); }
 .media-player-frame { position: relative; background: #000; aspect-ratio: 16 / 9; }
 .media-player-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -142,7 +142,7 @@ h3 { font-size: 1.55rem; }
 .media-queue-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .3rem .25rem .7rem; border-bottom: 1px solid var(--soft-line); }
 .media-queue-head .eyebrow { margin: 0; }
 .media-queue-head a { color: var(--gold); font-weight: 900; text-decoration: none; font-size: .9rem; }
-.media-video-item { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: .85rem; align-items: center; width: 100%; padding: .55rem; border: 1px solid transparent; border-radius: 18px; color: var(--ivory); background: transparent; text-align: left; cursor: pointer; transition: background .2s, border-color .2s, transform .2s; }
+.media-video-item { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: .75rem; align-items: center; width: 100%; padding: .5rem; border: 1px solid transparent; border-radius: 16px; color: var(--ivory); background: transparent; text-align: left; cursor: pointer; transition: background .2s, border-color .2s, transform .2s; }
 .media-video-item:hover, .media-video-item.active { background: rgba(196,167,125,.1); border-color: var(--line); transform: translateY(-1px); }
 .media-video-thumb { position: relative; display: block; overflow: hidden; border-radius: 14px; background: #000; }
 .media-video-thumb img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; filter: grayscale(.7) saturate(.85); transition: filter .25s, transform .25s; }

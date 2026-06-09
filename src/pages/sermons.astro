@@ -100,9 +100,9 @@ try {
               <p class="eyebrow">Latest 5</p>
               <a href={channelUrl} target="_blank" rel="noopener noreferrer">YouTube Channel</a>
             </div>
-            {videos.map((video, index) => (
+            {videos.slice(1).map((video) => (
               <button
-                class={`media-video-item${index === 0 ? ' active' : ''}`}
+                class="media-video-item"
                 type="button"
                 data-video-id={video.videoId}
                 data-video-title={video.title}
