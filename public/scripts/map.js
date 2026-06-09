@@ -1,111 +1,127 @@
-// Map module - Leaflet with custom popups
-const MapModule = (() => {
-  let map = null;
-
+(function () {
+  // Coordinates are approximate and should be refined with exact church coordinates when available.
   const locations = [
     {
-      name: 'Mahanaim Christian Church - Main Campus',
-      lat: 40.7128,
-      lng: -74.0060,
-      address: '123 Faith Avenue, City, State 00000',
-      description: 'Our main worship center where we gather every Sunday for worship, prayer, and fellowship.',
-      image: '/assets/gallery/church-1.jpg',
-      stats: { attendance: '500+', established: '1995' },
-      directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=40.7128,-74.0060'
+      name: 'Navi Mumbai Location',
+      status: 'Active',
+      lat: 19.0308,
+      lng: 73.0197,
+      address: 'Income Tax Colony, Sector - 21 & 22, Navi Mumbai - 400614, Maharashtra, India',
+      serviceTimes: 'Wed & Sat online: 5:00pm | Sun Main: 10:30am | Sun Youth: 6pm',
+      email: 'info@mahanchurch.org'
     },
     {
-      name: 'Mahanaim Prayer House',
-      lat: 40.7580,
-      lng: -73.9855,
-      address: '456 Grace Street, City, State 00001',
-      description: 'A quiet place for prayer, meditation, and small group gatherings throughout the week.',
-      image: '/assets/gallery/church-2.jpg',
-      stats: { capacity: '100', type: 'Prayer Center' },
-      directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=40.7580,-73.9855'
+      name: 'Mumbai Location',
+      status: 'Active',
+      lat: 19.2067,
+      lng: 72.8654,
+      address: 'Alica Nagar, Lokhandwala Township Akurli Road, Kandivali East, Mumbai-400101, Maharashtra',
+      serviceTimes: 'Wed & Sat online: 5:00pm | Sun Main: 10:30am | Sun Youth: 6pm',
+      email: 'info@mahanchurch.org'
+    },
+    {
+      name: 'Adelaide Location',
+      status: 'Active',
+      lat: -35.1266,
+      lng: 138.5234,
+      address: '9A Tokay Crescent, Morphett Vale, Adelaide, SA-5162, Australia',
+      serviceTimes: 'Sun School: 10:30am | Sun Main: 11:00am',
+      email: 'info@mahanchurch.org'
+    },
+    {
+      name: 'Dallas Location',
+      status: 'Upcoming',
+      lat: 32.7767,
+      lng: -96.7970,
+      address: 'Dallas, Texas, USA',
+      serviceTimes: 'Coming Soon',
+      email: 'info@mahanchurch.org'
     }
   ];
 
-  function createPopupContent(location) {
+  function directionsUrl(location) {
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address)}`;
+  }
+
+  function popup(location) {
     return `
-      <div class="map-popup-card">
-        <div class="map-popup-image" style="background-image:url('${location.image}')"></div>
-        <div class="map-popup-content">
-          <h3 class="map-popup-title">${location.name}</h3>
-          <p class="map-popup-address">
-            <i data-lucide="map-pin" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>
-            ${location.address}
-          </p>
-          <p class="map-popup-desc">${location.description}</p>
-          ${location.stats ? `
-            <div class="map-popup-stats">
-              ${Object.entries(location.stats).map(([key, val]) => 
-                `<span class="stat-item"><strong>${val}</strong> ${key}</span>`
-              ).join('')}
-            </div>
-          ` : ''}
-          <div class="map-popup-actions">
-            <a href="${location.directionsUrl}" target="_blank" rel="noopener noreferrer" 
-               class="btn btn-primary btn-sm"
-               onclick="if(window.Analytics)Analytics.mapInteraction('get-directions','${location.name}')">
-              <i data-lucide="navigation" style="width:14px;height:14px;"></i>
-              Get Directions
-            </a>
-          </div>
+      <div class="map-popup">
+        <div class="map-popup-image"></div>
+        <div class="map-popup-body">
+          <h3>${location.name}</h3>
+          <p><strong>${location.status}</strong></p>
+          <p>${location.address}</p>
+          <p>${location.serviceTimes}</p>
+          <p>${location.email}</p>
+          <a href="${directionsUrl(location)}" target="_blank" rel="noopener noreferrer" data-location="${location.name}">Get Directions</a>
         </div>
       </div>
     `;
   }
 
-  function init() {
-    const mapEl = document.getElementById('church-map');
-    if (!mapEl) return;
+  function initList(markers, map) {
+    const list = document.getElementById('location-list');
+    if (!list) return;
 
-    // Initialize map
-    map = L.map('church-map', {
-      center: [locations[0].lat, locations[0].lng],
-      zoom: 12,
-      scrollWheelZoom: false
-    });
+    list.innerHTML = locations.map((location, index) => `
+      <article class="location-card" tabindex="0" data-location-index="${index}">
+        <span class="status">${location.status}</span>
+        <h3>${location.name}</h3>
+        <p>${location.address}</p>
+        <p>${location.serviceTimes}</p>
+        <p><a href="mailto:${location.email}">${location.email}</a></p>
+        <p><a href="${directionsUrl(location)}" target="_blank" rel="noopener noreferrer">Get Directions</a></p>
+      </article>
+    `).join('');
 
-    // Add tile layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19
-    }).addTo(map);
-
-    // Add markers
-    locations.forEach(loc => {
-      const marker = L.marker([loc.lat, loc.lng], {
-        icon: L.divIcon({
-          className: 'custom-marker',
-          html: '<div class="marker-pin"></div>',
-          iconSize: [30, 42],
-          iconAnchor: [15, 42]
-        })
-      }).addTo(map);
-
-      marker.bindPopup(createPopupContent(loc), {
-        maxWidth: 320,
-        className: 'custom-popup'
+    list.querySelectorAll('.location-card').forEach(card => {
+      const open = () => {
+        const index = Number(card.dataset.locationIndex);
+        const location = locations[index];
+        map.setView([location.lat, location.lng], location.status === 'Upcoming' ? 8 : 12, { animate: true });
+        markers[index].openPopup();
+      };
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          open();
+        }
       });
-
-      marker.on('click', () => {
-        if (window.Analytics) window.Analytics.mapInteraction('marker-click', loc.name);
+      card.querySelectorAll('a[target="_blank"]').forEach(link => {
+        link.addEventListener('click', () => window.Analytics?.directionsClick(locations[Number(card.dataset.locationIndex)].name));
       });
-
-      marker.on('popupopen', () => {
-        // Re-initialize Lucide icons in popup
-        if (window.lucide) window.lucide.createIcons();
-      });
-    });
-
-    // Track map interactions
-    map.on('zoomend', () => {
-      if (window.Analytics) window.Analytics.mapInteraction('zoom', `level-${map.getZoom()}`);
     });
   }
 
-  return { init };
-})();
+  window.initChurchMap = function initChurchMap() {
+    const mapEl = document.getElementById('church-map');
+    if (!mapEl || !window.L) return;
 
-window.MapModule = MapModule;
+    const map = L.map(mapEl, { scrollWheelZoom: false }).setView([12.8, 75.6], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    const icon = L.divIcon({ className: 'custom-marker', html: '<div class="marker-pin"></div>', iconSize: [30, 42], iconAnchor: [15, 42] });
+    const markers = locations.map((location, index) => {
+      const marker = L.marker([location.lat, location.lng], { icon }).addTo(map).bindPopup(popup(location), { maxWidth: 330 });
+      marker.on('mouseover', () => {
+        if (window.matchMedia('(hover: hover)').matches) marker.openPopup();
+      });
+      marker.on('popupopen', () => {
+        document.querySelectorAll('.location-card').forEach(card => card.classList.toggle('active', Number(card.dataset.locationIndex) === index));
+        window.Analytics?.mapMarkerOpen(location.name);
+        setTimeout(() => {
+          document.querySelectorAll('.map-popup a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', () => window.Analytics?.directionsClick(link.dataset.location || location.name));
+          });
+        }, 0);
+      });
+      return marker;
+    });
+
+    initList(markers, map);
+  };
+})();

@@ -10,7 +10,6 @@ const GalleryModule = (() => {
     { type: 'image', src: '/assets/gallery/youth-1.jpg', alt: 'Youth ministry' },
     { type: 'image', src: '/assets/gallery/outreach-1.jpg', alt: 'Community outreach' },
     { type: 'image', src: '/assets/gallery/baptism-1.jpg', alt: 'Baptism service' },
-    { type: 'video', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ', alt: 'Ministry highlight video' },
     { type: 'image', src: '/assets/gallery/worship-2.jpg', alt: 'Worship team' },
     { type: 'image', src: '/assets/gallery/children-1.jpg', alt: 'Children ministry' }
   ];
@@ -25,17 +24,6 @@ const GalleryModule = (() => {
           <div class="gallery-item" role="listitem">
             <img src="${item.src}" alt="${item.alt}" loading="lazy" 
                  onerror="this.src='/assets/gallery/placeholder.jpg'" />
-          </div>
-        `;
-      } else {
-        return `
-          <div class="gallery-item gallery-item-video" role="listitem">
-            <iframe src="${item.src}" 
-                    title="${item.alt}"
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen
-                    loading="lazy"></iframe>
           </div>
         `;
       }

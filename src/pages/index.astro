@@ -1,0 +1,195 @@
+---
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '';
+const umamiScriptUrl = import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || 'https://analytics.umami.is/script.js';
+---
+<!DOCTYPE html>
+<html lang="en" data-umami-website-id={umamiWebsiteId} data-umami-script-url={umamiScriptUrl}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahanaim Christian Church | Faith, Hope & Loving Community</title>
+  <meta name="description" content="Mahanaim Christian Church is a global Christian community with gatherings in India, Australia, and an upcoming Dallas location, centered on worship, Bible teaching, prayer, and fellowship." />
+  <meta name="author" content="Mahanaim Christian Church" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mahanaim Christian Church | Faith, Hope & Loving Community" />
+  <meta property="og:description" content="A global Christian community centered on worship, Bible teaching, prayer, and fellowship." />
+  <meta property="og:image" content="./assets/mahanaim-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mahanaim Christian Church" />
+  <meta name="twitter:description" content="Faith, hope, and loving community through Jesus Christ." />
+  <link rel="icon" type="image/png" href="./assets/mahanaim-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Church", "Organization"],
+        "name": "Mahanaim Christian Church",
+        "alternateName": "Mahanaim Christian Welfare Association",
+        "description": "A global Christian community centered on worship, Bible teaching, prayer, and fellowship.",
+        "email": "info@mahanchurch.org",
+        "foundingDate": "2009",
+        "sameAs": ["https://www.youtube.com/channel/UCpCEVmnuoAzm1oBFkjQfIvA"]
+      },
+      {
+        "@type": "WebSite",
+        "name": "Mahanaim Christian Church",
+        "description": "Faith, hope, and loving community through Jesus Christ."
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Mahanaim Christian Church home">
+      <img src="./assets/mahanaim-logo.png" alt="Mahanaim Christian Church logo" />
+      <span><strong>Mahanaim</strong> Christian Church</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#ministries">Ministries</a>
+      <a href="#sermons">Sermons</a>
+      <a href="#events">Events</a>
+      <a href="#locations">Locations</a>
+      <a href="#articles">Articles</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="home">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Mahanaim Christian Welfare Association</p>
+        <img class="hero-logo" src="./assets/mahanaim-logo.png" alt="" />
+        <h1>Welcome Home</h1>
+        <p class="hero-copy">Mahanaim Christian Church is a place to find faith, hope, and loving community.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#locations" data-cta="Visit Us">Visit Us</a>
+          <a class="btn btn-ghost" href="#sermons" data-cta="Watch Sermons">Watch Sermons</a>
+          <a class="btn btn-outline" href="#ministries" data-cta="Explore Ministries">Explore Ministries</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section split" id="about">
+      <div>
+        <p class="eyebrow">Our Story</p>
+        <h2>A home for authentic faith, hope, and love.</h2>
+      </div>
+      <div class="prose">
+        <p>Mahanaim Christian Church began with a vision to build a home where every person could experience authentic faith, hope, and love. MCC serves local and global communities by proclaiming the good news of Jesus Christ and nurturing people through worship, teaching, and service.</p>
+        <p>We believe in one God: Father, Son, and Holy Spirit. We uphold the Bible as the inspired Word of God. Our mission is to love God and love people through prayer, discipleship, fellowship, and acts of compassion.</p>
+      </div>
+    </section>
+
+    <section class="section leadership" aria-labelledby="leadership-heading">
+      <p class="eyebrow">Leadership</p>
+      <h2 id="leadership-heading">Our Shepherding Team</h2>
+      <div class="card-grid team-grid">
+        <article class="person-card"><img src="./assets/team/raju.jpg" alt="Mr. Raju Lukose" /><h3>Mr. Raju Lukose</h3><p>Servant of God</p></article>
+        <article class="person-card"><img src="./assets/team/sydney.jpg" alt="Mr. Sydney Carvalho" /><h3>Mr. Sydney Carvalho</h3><p>Servant of God</p></article>
+        <article class="person-card"><img src="./assets/team/shan.jpg" alt="Mr. Shan Nishant" /><h3>Mr. Shan Nishant</h3><p>Servant of God</p></article>
+        <article class="person-card"><img src="./assets/team/koshy.png" alt="Mr. Koshy" /><h3>Mr. Koshy</h3><p>Servant of God</p></article>
+      </div>
+    </section>
+
+    <section class="section image-band" id="ministries">
+      <div class="section-head">
+        <p class="eyebrow">Ministries</p>
+        <h2>Grow, serve, and connect in faith.</h2>
+      </div>
+      <div class="card-grid ministry-grid">
+        <article class="feature-card" data-ministry="Kids Church"><h3>Kids Church</h3><p>Fun and nurturing programs teaching God's love every Sunday.</p></article>
+        <article class="feature-card" data-ministry="Youth & Young Adults"><h3>Youth & Young Adults</h3><p>Weekly gatherings to grow, serve, and connect in faith.</p></article>
+        <article class="feature-card" data-ministry="Worship & Creative"><h3>Worship & Creative</h3><p>Music and media teams that lead worship.</p></article>
+        <article class="feature-card" data-ministry="Life Groups"><h3>Life Groups</h3><p>Small midweek groups for fellowship and Bible study.</p></article>
+        <article class="feature-card" data-ministry="Outreach"><h3>Outreach</h3><p>Food programs, local partnerships, and community service.</p></article>
+        <article class="feature-card" data-ministry="Join a Serve Team"><h3>Join a Serve Team</h3><p>Greeters, kids, sound, media, worship, and more.</p></article>
+        <article class="feature-card" data-ministry="Prayer Team"><h3>Prayer Team</h3><p>Intercede for church, city, and families.</p></article>
+        <article class="feature-card" data-ministry="Community Outreach"><h3>Community Outreach</h3><p>Help with food drives, visits, and events.</p></article>
+      </div>
+    </section>
+
+    <section class="section split dark-panel" id="sermons">
+      <div>
+        <p class="eyebrow">Sermons & Media</p>
+        <h2>Watch now and get to know us.</h2>
+      </div>
+      <div class="media-card">
+        <p>Recent sermon videos can be shared here with static video IDs or a playlist embed when available. For security, this site does not use exposed YouTube API keys in frontend code.</p>
+        <a class="btn btn-primary" href="https://www.youtube.com/channel/UCpCEVmnuoAzm1oBFkjQfIvA" target="_blank" rel="noopener noreferrer" data-cta="YouTube Channel">Visit YouTube Channel</a>
+      </div>
+    </section>
+
+    <section class="section" id="events">
+      <div class="section-head">
+        <p class="eyebrow">Gather With Us</p>
+        <h2>Upcoming Events</h2>
+      </div>
+      <div class="card-grid events-grid">
+        <article class="event-card"><span>Aug 19, 2024</span><h3>Baptism</h3><p>Join us for Baptism. Starts 7pm.</p></article>
+        <article class="event-card"><span>Every Wednesday</span><h3>Bible Study</h3><p>Online at 5pm on Google Meet. Open to all ages.</p></article>
+        <article class="event-card"><span>Every Saturday</span><h3>Bible Study</h3><p>Online at 5pm on Google Meet. Everyone welcome.</p></article>
+      </div>
+    </section>
+
+    <section class="section locations" id="locations">
+      <div class="section-head">
+        <p class="eyebrow">Locations</p>
+        <h2>Find Mahanaim Near You</h2>
+        <p>Explore our gatherings in India and Australia, plus the upcoming Dallas location.</p>
+      </div>
+      <div class="map-layout">
+        <div id="church-map" aria-label="Interactive map of Mahanaim Christian Church locations"></div>
+        <div class="location-list" id="location-list" aria-label="Church location list"></div>
+      </div>
+    </section>
+
+    <section class="section split" id="articles">
+      <div>
+        <p class="eyebrow">Articles & Devotions</p>
+        <h2>Teaching for the journey.</h2>
+      </div>
+      <div class="article-grid">
+        <article class="article-card"><h3>Faith, Hope & Love</h3><p>Devotional reflections from the Mahanaim community will be shared here.</p></article>
+        <article class="article-card"><h3>Growing Through the Word</h3><p>Static article publishing is safe for GitHub Pages. A secure CMS can be added later.</p></article>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>We would love to hear from you.</h2>
+      <p>Email us at <a href="mailto:info@mahanchurch.org">info@mahanchurch.org</a> or visit one of our locations listed above.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <img src="./assets/mahanaim-logo.png" alt="Mahanaim Christian Church logo" />
+      <p><strong>Mahanaim Christian Church</strong><br />Mahanaim Christian Welfare Association</p>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href="#about">About</a>
+      <a href="#ministries">Ministries</a>
+      <a href="#locations">Locations</a>
+      <a href="./privacy/">Privacy</a>
+    </nav>
+    <p>&copy; 2009 Mahanaim Christian Welfare Association. All rights reserved.</p>
+  </footer>
+
+  <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script is:inline src="./scripts/analytics.js"></script>
+  <script is:inline src="./scripts/map.js"></script>
+  <script is:inline src="./scripts/main.js"></script>
+</body>
+</html>

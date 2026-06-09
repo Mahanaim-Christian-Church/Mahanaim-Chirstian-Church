@@ -105,10 +105,10 @@ const teamData = [
 3. Add videos:
 
 ```javascript
-{ id: 'dQw4w9WgXcQ', title: 'Sunday Sermon: Faith' },
+{ id: 'REPLACE_WITH_VIDEO_ID', title: 'Sunday Sermon: Faith' },
 ```
 
-The `id` is from the YouTube URL: `youtube.com/watch?v=dQw4w9WgXcQ`
+The `id` is from the YouTube URL: `youtube.com/watch?v=REPLACE_WITH_VIDEO_ID`
 
 ---
 
