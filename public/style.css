@@ -91,7 +91,8 @@ h3 { font-size: 1.55rem; }
 #church-map .leaflet-bottom { z-index: 1; }
 #church-map .leaflet-popup-pane { z-index: 2; }
 .custom-marker { background: transparent; border: 0; }
-.marker-pin { width: 26px; height: 26px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--gold); border: 3px solid var(--black); box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+.marker-pin { display: none; }
+.marker-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 3px solid var(--black); box-shadow: 0 0 0 6px rgba(216,180,93,.22), 0 8px 24px rgba(0,0,0,.35); }
 .leaflet-popup-content-wrapper { padding: 0; overflow: hidden; border-radius: 18px; background: var(--black); color: var(--ivory); border: 1px solid var(--line); }
 .leaflet-popup-content { margin: 0; width: 310px !important; }
 .map-popup-image { min-height: 130px; background: linear-gradient(135deg, rgba(216,180,93,.25), rgba(9,8,6,.2)), url('./assets/about.jpg') center/cover; }
