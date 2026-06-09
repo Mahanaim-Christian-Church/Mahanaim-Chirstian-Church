@@ -58,40 +58,6 @@
     `;
   }
 
-  function initList(markers, map) {
-    const list = document.getElementById('location-list');
-    if (!list) return;
-
-    list.innerHTML = locations.map((location, index) => `
-      <article class="location-card" tabindex="0" data-location-index="${index}">
-        <span class="status">${location.status}</span>
-        <h3>${location.name}</h3>
-        <p>${location.serviceTimes}</p>
-        <p><a href="mailto:${location.email}">${location.email}</a></p>
-        <p><a href="${directionsUrl(location)}" target="_blank" rel="noopener noreferrer">Get Directions</a></p>
-      </article>
-    `).join('');
-
-    list.querySelectorAll('.location-card').forEach(card => {
-      const open = () => {
-        const index = Number(card.dataset.locationIndex);
-        const location = locations[index];
-        map.setView([location.lat, location.lng], location.status === 'Upcoming' ? 8 : 12, { animate: true });
-        markers[index].openPopup();
-      };
-      card.addEventListener('click', open);
-      card.addEventListener('keydown', event => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          open();
-        }
-      });
-      card.querySelectorAll('a[target="_blank"]').forEach(link => {
-        link.addEventListener('click', () => window.Analytics?.directionsClick(locations[Number(card.dataset.locationIndex)].name));
-      });
-    });
-  }
-
   window.initChurchMap = function initChurchMap() {
     const mapEl = document.getElementById('church-map');
     if (!mapEl || !window.L) return;
@@ -109,10 +75,9 @@
     }).addTo(map);
 
     const icon = L.divIcon({ className: 'custom-marker', html: '<div class="marker-pin"></div>', iconSize: [30, 42], iconAnchor: [15, 42] });
-    const markers = locations.map((location, index) => {
+    locations.forEach(location => {
       const marker = L.marker([location.lat, location.lng], { icon }).addTo(map).bindPopup(popup(location), { maxWidth: 330 });
       marker.on('popupopen', () => {
-        document.querySelectorAll('.location-card').forEach(card => card.classList.toggle('active', Number(card.dataset.locationIndex) === index));
         window.Analytics?.mapMarkerOpen(location.name);
         setTimeout(() => {
           document.querySelectorAll('.map-popup a[target="_blank"]').forEach(link => {
@@ -120,9 +85,6 @@
           });
         }, 0);
       });
-      return marker;
     });
-
-    initList(markers, map);
   };
 })();
