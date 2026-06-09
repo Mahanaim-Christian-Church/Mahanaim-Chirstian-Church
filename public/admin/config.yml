@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: Mahanaim-Christian-Church/Mahanaim-Chirstian-Church
+  branch: main
+  # Required for GitHub Pages: configure a GitHub OAuth proxy and replace this URL.
+  # Only authorized GitHub users/collaborators with repo access can publish.
+  base_url: https://REPLACE_WITH_YOUR_OAUTH_PROXY_URL
+
+media_folder: public/assets/articles
+public_folder: /Mahanaim-Chirstian-Church/assets/articles
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: articles
+    label: Articles
+    folder: src/content/articles
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, required: false }
+      - { label: Author, name: author, widget: string, default: Mahanaim Christian Church }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Excerpt, name: excerpt, widget: text, required: false }
+      - { label: Featured Image, name: image, widget: image, required: false }
+      - { label: Body, name: body, widget: markdown }

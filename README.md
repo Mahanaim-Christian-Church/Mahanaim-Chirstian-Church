@@ -1,5 +1,11 @@
 # Mahanaim Christian Church Website
 
+## Authorized Article Publishing
+
+Articles are managed through Decap CMS at `/admin/` and saved as Markdown files in `src/content/articles`.
+
+Because this site is hosted on GitHub Pages, GitHub login requires an OAuth proxy. Update `public/admin/config.yml` and replace `https://REPLACE_WITH_YOUR_OAUTH_PROXY_URL` with your configured GitHub OAuth proxy URL. Only GitHub users with authorized repository access can publish changes.
+
 A modern, production-ready church website built with **Astro**, optimized for **GitHub Pages**, featuring elegant design, comprehensive SEO, AI-search optimization, privacy-focused analytics, and an immersive Bible reading experience.
 
 ---

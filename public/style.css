@@ -119,6 +119,17 @@ h3 { font-size: 1.55rem; }
 .leaflet-container a.leaflet-popup-close-button { color: var(--gold); }
 
 .article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.article-editor-panel { margin-top: 0; }
+.contributor-login, .article-form { display: grid; gap: 1rem; max-width: 760px; }
+.form-row { display: grid; gap: .45rem; }
+.form-row label, .contributor-login label { color: var(--gold); font-weight: 900; letter-spacing: .04em; }
+.form-input, .form-textarea { width: 100%; border: 1px solid var(--soft-line); background: rgba(255,255,255,.045); color: var(--ivory); border-radius: 14px; padding: .85rem 1rem; outline: none; }
+.form-input:focus, .form-textarea:focus { border-color: var(--line); box-shadow: 0 0 0 4px rgba(196,167,125,.1); }
+.form-textarea { min-height: 220px; resize: vertical; }
+.form-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.article-draft-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 16px; border: 1px solid var(--soft-line); margin-bottom: 1rem; }
+.draft-meta { color: var(--gold) !important; font-size: .9rem; font-weight: 800; }
+.draft-delete { margin-top: 1rem; }
 .sermons-page { min-height: calc(100vh - 90px); }
 .sermon-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
 .sermon-card { display: flex; flex-direction: column; gap: 1rem; background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); border: 1px solid var(--line); border-radius: 24px; padding: 1rem; }
