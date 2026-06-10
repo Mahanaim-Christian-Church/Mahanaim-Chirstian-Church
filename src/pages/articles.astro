@@ -57,24 +57,31 @@ const articles = Object.entries(articleModules)
   </header>
 
   <main>
-    <section class="section split">
-      <div>
+    <section class="section articles-page">
+      <div class="articles-hero">
         <p class="eyebrow">Articles & Devotions</p>
         <h3 class="page-title">Teaching for the journey.</h3>
         <p class="hero-copy">Authorized contributors can publish articles through the GitHub-backed CMS.</p>
-        <p><a class="btn btn-primary" href="../admin/">Contributor Login</a></p>
+        <div class="hero-actions"><a class="btn btn-primary" href="../admin/">Contributor Login</a><a class="btn btn-outline" href="../contact/">Request Access</a></div>
       </div>
-      <div class="article-grid">
+      <div class="articles-layout">
+        <aside class="articles-side-card">
+          <p class="eyebrow">Publishing</p>
+          <h3>Share what strengthens the church.</h3>
+          <p>Articles are reviewed and published through the authorized GitHub CMS workflow.</p>
+        </aside>
+        <div class="article-grid article-grid-editorial">
         {articles.length > 0 ? articles.map(article => (
           <article class="article-card article-draft-card">
             {article.image && <img src={article.image} alt="" loading="lazy" />}
-            <h3>{article.title}</h3>
             <p class="draft-meta">By {article.author}{article.date ? ` • ${article.date}` : ''}</p>
+            <h3>{article.title}</h3>
             <p>{article.excerpt}</p>
           </article>
         )) : (
           <article class="article-card"><h3>No articles yet</h3><p>Authorized contributors can add the first article through the CMS.</p></article>
         )}
+        </div>
       </div>
     </section>
   </main>
