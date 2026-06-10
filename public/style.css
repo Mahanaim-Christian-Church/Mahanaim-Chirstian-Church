@@ -54,6 +54,7 @@ main, .site-footer { margin-left: 82px; }
 .hero-text { min-width: 0; }
 .hero-association { margin: 0 0 1rem; color: #d8b45d; text-transform: uppercase; letter-spacing: .12em; font-size: clamp(1.15rem, 2.4vw, 1.8rem); font-weight: 900; }
 .hero-logo { width: clamp(92px, 14vw, 150px); height: clamp(92px, 14vw, 150px); object-fit: cover; border-radius: 50%; background: var(--charcoal-2); border: 1px solid var(--line); padding: 7px; filter: drop-shadow(0 14px 30px rgba(0,0,0,.5)); }
+.hero-text-mark { display: grid; place-items: center; color: var(--gold); font-weight: 900; letter-spacing: .08em; font-size: clamp(1.15rem, 2vw, 1.8rem); }
 .eyebrow { margin: 0 0 .75rem; color: var(--gold); text-transform: uppercase; letter-spacing: .17em; font-size: .78rem; font-weight: 900; }
 h1, h2, h3 { font-family: var(--font-display); line-height: .98; margin: 0; }
 h1 { font-size: clamp(3.5rem, 9vw, 8rem); max-width: 900px; }
